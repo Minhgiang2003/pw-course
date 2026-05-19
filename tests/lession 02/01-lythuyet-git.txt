@@ -1,0 +1,4 @@
+Git init: Dùng để khởi tạo Git cho folder
+Git add <file_name> là đưa độc lập file đó lên Staging Area chứ không đẩy toàn bộ file có trong folder 
+Git add . là đưa toàn bộ file đã thay đổi có trong folder lên Staging Area, trong trường hợp có 3 file 1,2,3 mà trước đó đã đẩy file 1 thì khi chạy git add . sẽ chỉ đẩy file 2,3 
+git commit -m "message" dùng để lưu lại thay đổi vào lịch sử Git
