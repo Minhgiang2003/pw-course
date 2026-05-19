@@ -1,0 +1,53 @@
+Câu điều kiện dùng để kiểm tra một đoạn logic trước khi chạy 
+Nếu điều kiện đúng thì mới chạy 
+Trong JS, có các loại câu điều kiện: 
+if(điều kiện){
+    //code
+}
+
+
+===============================
+if(điều kiện){
+    //code
+}else{
+    //code
+}
+
+===============================
+if(điều kiện){
+    //code
+}else if(điều kiện){
+    //code
+}else{
+    //code
+}
+
+
+===============================
+switch (biến) {
+    case giá_trị_1:
+        // code
+        break;
+    case giá_trị_2:
+        // code
+        break;
+    default:
+        // code khi không có case nào khớp
+}
+VD:
+let day = 2;
+switch (day) {
+    case 1: //Kiểm tra từng giá trị
+        console.log("Thứ Hai");
+        break;
+    case 2:
+        console.log("Thứ Ba");
+        break; //Thoát khỏi switch, nếu không có sẽ chạy tiếp các case dưới
+    case 3:
+        console.log("Thứ Tư");
+        break;
+    default: //chạy khi không có case nào khớp, tương tự với else
+        console.log("Không xác định");
+}
+
+// Kết quả: Thứ Ba
