@@ -1,0 +1,88 @@
+=====================================================
+BÀI TẬP LÝ THUYẾT GIT - LESSON 03
+=====================================================
+
+1. git commit --amend
+-----------------------------------------------------
+Lệnh này cho phép chỉnh sửa commit MỚI NHẤT (gần nhất) trong lịch sử.
+Cụ thể, nó sẽ:
+  - Mở trình soạn thảo (editor) để bạn có thể thay đổi nội dung message của commit cuối.
+  - Gộp các thay đổi đang ở Staging Area (index) vào commit cuối đó (nếu có).
+
+Ví dụ sử dụng:
+  git add forgotten-file.txt
+  git commit --amend
+
+=> Kết quả: file forgotten-file.txt được thêm vào commit trước đó,
+   và bạn có thể sửa lại message nếu muốn.
+
+Lưu ý: Lệnh này VIẾT LẠI lịch sử commit (thay đổi commit hash),
+vì vậy KHÔNG nên dùng với các commit đã được push lên remote repository.
+
+-----------------------------------------------------
+2. git commit --amend -m"<message>"
+-----------------------------------------------------
+Tương tự như lệnh trên, nhưng thay vì mở editor, bạn truyền thẳng
+nội dung message mới vào qua tham số -m.
+
+Ví dụ sử dụng:
+  git commit --amend -m"Fix: sửa lỗi đăng nhập"
+
+=> Kết quả: commit gần nhất sẽ được cập nhật với message mới là
+   "Fix: sửa lỗi đăng nhập", không cần mở trình soạn thảo.
+
+Lưu ý: Tương tự --amend, lệnh này cũng thay đổi commit hash,
+nên chỉ dùng trước khi push lên remote.
+
+-----------------------------------------------------
+3. git restore --staged <file>
+-----------------------------------------------------
+Lệnh này đưa một file ra khỏi Staging Area (Unstage),
+tức là HỦY lệnh "git add" đã thực hiện trước đó với file đó.
+
+  - File vẫn giữ nguyên nội dung đã chỉnh sửa trong Working Directory.
+  - Chỉ đơn giản là bỏ file ra khỏi vùng chuẩn bị commit (index).
+
+Ví dụ sử dụng:
+  git restore --staged index.html
+
+=> Kết quả: index.html được đưa ra khỏi Staging Area,
+   trở về trạng thái "modified" (chưa được stage).
+
+So sánh:
+  - git restore --staged <file>  : Chỉ unstage, giữ nguyên nội dung file.
+  - git restore <file>           : Hủy cả thay đổi trong Working Directory (nguy hiểm hơn).
+
+-----------------------------------------------------
+4. git reset HEAD~1
+-----------------------------------------------------
+Lệnh này hủy bỏ (undo) commit gần nhất, đưa các thay đổi của commit đó
+trở về Staging Area (trạng thái đã git add).
+
+  - HEAD~1 nghĩa là "1 commit trước HEAD (commit hiện tại)".
+  - Mặc định sử dụng chế độ --mixed, tức là:
+      + Commit bị xóa khỏi lịch sử.
+      + Các thay đổi vẫn còn trong Working Directory và được unstage.
+
+Ví dụ sử dụng:
+  git reset HEAD~1
+
+=> Kết quả: commit mới nhất bị hủy, code vẫn còn đó nhưng chưa được commit.
+
+Các chế độ khác:
+  git reset --soft HEAD~1   : Hủy commit, giữ thay đổi trong Staging Area (đã stage).
+  git reset --mixed HEAD~1  : Hủy commit, giữ thay đổi nhưng unstage (mặc định).
+  git reset --hard HEAD~1   : Hủy commit VÀ xóa luôn thay đổi trong Working Directory (MẤT DỮ LIỆU).
+
+=====================================================
+KẾT LUẬN TỔNG QUAN
+=====================================================
+
+| Lệnh                          | Mục đích chính                              |
+|-------------------------------|---------------------------------------------|
+| git commit --amend            | Sửa commit cuối (mở editor)                 |
+| git commit --amend -m"..."    | Sửa message commit cuối (không mở editor)   |
+| git restore --staged <file>   | Unstage file (hủy git add)                  |
+| git reset HEAD~1              | Hủy commit cuối, giữ lại thay đổi           |
+
+=====================================================
